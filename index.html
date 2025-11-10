@@ -8,10 +8,10 @@
   #game { position: relative; width: 100vw; height: 100vh; }
   .pescador, .pez {
     position: absolute;
-    width: 50px; height: 50px;
+    width: 80px; height: 80px;
   }
-  .pescador { background: url('https://i.imgur.com/GX2F1H2.png') center/contain no-repeat; }
-  .pez { background: url('https://i.imgur.com/0wZVt1T.png') center/contain no-repeat; }
+  .pescador { background: url('descarga (1).jfif') center/contain no-repeat; }
+  .pez { background: url('pez.png') center/contain no-repeat; }
   #puntos { position: absolute; top: 10px; left: 10px; font: bold 20px sans-serif; color: white; }
 </style>
 </head>
@@ -29,16 +29,16 @@ let puntos = document.getElementById('puntos');
 let x = 100, y = 100, score = 0;
 
 function moverPescador(dx, dy) {
-  x = Math.max(0, Math.min(window.innerWidth - 50, x + dx));
-  y = Math.max(0, Math.min(window.innerHeight - 50, y + dy));
+  x = Math.max(0, Math.min(window.innerWidth - 80, x + dx));
+  y = Math.max(0, Math.min(window.innerHeight - 80, y + dy));
   pescador.style.left = x + 'px';
   pescador.style.top = y + 'px';
   verificarColision();
 }
 
 function moverPez() {
-  pez.style.left = Math.random() * (window.innerWidth - 50) + 'px';
-  pez.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+  pez.style.left = Math.random() * (window.innerWidth - 80) + 'px';
+  pez.style.top = Math.random() * (window.innerHeight - 80) + 'px';
 }
 moverPez();
 
