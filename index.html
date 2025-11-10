@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego de Pesca</title>
+<style>
+  body { margin: 0; overflow: hidden; background: #87ceeb; }
+  #game { position: relative; width: 100vw; height: 100vh; }
+  .pescador, .pez {
+    position: absolute;
+    width: 50px; height: 50px;
+  }
+  .pescador { background: url('https://i.imgur.com/GX2F1H2.png') center/contain no-repeat; }
+  .pez { background: url('https://i.imgur.com/0wZVt1T.png') center/contain no-repeat; }
+  #puntos { position: absolute; top: 10px; left: 10px; font: bold 20px sans-serif; color: white; }
+</style>
+</head>
+<body>
+<div id="game">
+  <div id="pescador" class="pescador"></div>
+  <div id="pez" class="pez"></div>
+  <div id="puntos">Puntos: 0</div>
+</div>
+
+<script>
+let pescador = document.getElementById('pescador');
+let pez = document.getElementById('pez');
+let puntos = document.getElementById('puntos');
+let x = 100, y = 100, score = 0;
+
+function moverPescador(dx, dy) {
+  x = Math.max(0, Math.min(window.innerWidth - 50, x + dx));
+  y = Math.max(0, Math.min(window.innerHeight - 50, y + dy));
+  pescador.style.left = x + 'px';
+  pescador.style.top = y + 'px';
+  verificarColision();
+}
+
+function moverPez() {
+  pez.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+  pez.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+}
+moverPez();
+
+function verificarColision() {
+  let rect1 = pescador.getBoundingClientRect();
+  let rect2 = pez.getBoundingClientRect();
+  if (rect1.x < rect2.x + rect2.width &&
+      rect1.x + rect1.width > rect2.x &&
+      rect1.y < rect2.y + rect2.height &&
+      rect1.y + rect1.height > rect2.y) {
+    score++;
+    puntos.textContent = "Puntos: " + score;
+    moverPez();
+  }
+}
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp') moverPescador(0, -20);
+  if (e.key === 'ArrowDown') moverPescador(0, 20);
+  if (e.key === 'ArrowLeft') moverPescador(-20, 0);
+  if (e.key === 'ArrowRight') moverPescador(20, 0);
+});
+</script>
+</body>
+</html>
